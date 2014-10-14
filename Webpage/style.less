@@ -1,0 +1,527 @@
+@blue: #278CC4;
+@spacegray: #383838;
+
+@logo-height: 44px;
+@logo-width: 207px;
+
+@content-width: 980px; 
+@text-width: 750px;
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Open Sans;
+	margin: 0px;
+	padding: 0px;
+
+	color: #212121;
+}
+
+
+
+.container {
+	width: 90%;
+	margin: 0px auto;
+	max-width: @content-width;
+}
+
+.text-container {
+	.container;
+	max-width: @text-width;
+	
+}
+
+.nav {
+	@padding: 20px;
+
+	background: white;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+
+	z-index: 99;
+	
+	border-bottom: none;
+
+	&.floating {
+		border-bottom: 1px solid lighten(@spacegray, 70%);
+	}
+
+	&.background {
+		background: transparent;
+
+		-webkit-transition: 0.3s background;
+		-o-transition: 0.3s background;
+		transition: 0.3s background;
+	}
+
+	&.background.floating {
+		background: white;
+
+		-webkit-transition: 0s background;
+		-o-transition: 0s background;
+		transition: 0s background;
+	}
+
+
+	h1 {
+		margin: @padding 0px;
+		padding: 0px;
+		display: inline-block;
+		width: auto;
+
+
+		background: url("logo.png");
+		width: @logo-width;
+		height: @logo-height;
+
+		font-size: 0px;
+		float: left;
+		margin-right: 10px;
+		color: transparent;
+
+		position: relative;
+
+		&:after {
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			-webkit-mask-box-image: url("logo.png");
+			content: "";
+			display: block;
+
+			-webkit-transition: 0.3s all;
+		}
+
+		&:active {
+			margin-top: @padding + 1;
+			margin-bottom: @padding - 1;
+		}
+
+		&:hover:after {
+			background: rgba(255,255,255,0.2);
+		}
+
+		a {
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			z-index: 1;
+		}
+	}
+
+	ul {
+		margin: 0px;
+		padding: 0px;
+		display: inline-block;
+		list-style: none;
+	}
+
+	
+
+	ul li {
+		display: inline-block;
+	}
+
+	ul li a {
+		text-decoration: none;
+		position: relative;
+		color: black;
+
+		-webkit-transition: 0.3s all;
+	}
+
+
+
+	ul > li > a:after {
+		display: block;
+		content: "";
+		position: absolute;
+		bottom: 2px;
+		
+		-webkit-transition: 0.3s all;
+		// -webkit-transition-delay: 0.5s;
+
+		width: 0px;
+
+		height: 1px;
+		border-bottom: 1px solid darken(white, 30%);
+	}
+
+	ul > li {
+		padding-left: 25px;
+	}
+
+
+
+	ul > li a {
+		font-size: 18px;
+		color: darken(white, 10%);
+	}
+
+
+
+
+	
+
+
+	&:hover ul > li a {
+		color: darken(white, 30%);
+	}
+
+	&:hover .search {
+		opacity: 0.8;
+	}
+
+	ul > li a.active, ul > li:hover a {
+		color: @blue;
+		border-bottom-color: @blue;
+	}
+
+	ul li a:hover {
+		text-decoration: underline;
+	}
+
+	> * > ul {
+		float: left;
+	}
+
+
+
+	.container > ul > li > a {
+		line-height: @logo-height + @padding*2; 
+	}
+
+	.container > ul > li:hover {
+		cursor: pointer;
+	}
+
+	.container > ul > li:hover > a {
+		text-decoration: none;
+		&:after {
+			width: 100%;
+			// -webkit-transition-delay: 0s;
+		}
+	}
+
+
+	ul > li > .sidenav {
+		overflow: hidden;
+		height: 0;
+		position: absolute;
+		box-sizing: border-box;
+		left: 0;
+		right: 0;
+		top: 100%;
+		background: @blue;
+
+		-webkit-transition: 0.3s all;
+		// -webkit-transition-delay: 0.5s;
+
+		ul:before {
+			content: "Kategorie";
+			display: inline-block;
+			width: @logo-width;
+			margin-right: 5px;
+			text-align: right;
+			color: white;
+			font-weight: 500;
+		}
+
+		> ul {
+			display: block;
+			position: relative;
+			padding: 10px 0px 10px 0px;
+
+			.container;
+		}
+
+		> ul li a {
+			color: white;
+		}
+		
+	}
+
+	ul > li:hover > .sidenav {
+		height: 44px;
+		-webkit-transition: 0.1s all;
+	}
+
+
+
+	
+
+	.searchbox {
+		display: inline-block;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+
+		height: @padding*2 + @logo-height;
+
+		
+
+		.container { padding-left: @logo-width + 25px; }
+
+		input {
+			float: left;
+			display: inline-block;
+		}
+
+		.inside {
+			display: inline-block;
+		}
+
+		 .search {
+			
+			display: inline-block;
+			width: 26px;
+		
+			float: left;
+			
+			background: url("search.png");
+		
+		
+		
+			background-repeat: no-repeat;
+			background-position: center center;
+		
+			font-size: 0px;
+			color: transparent;
+		
+			opacity: 0.5;
+		
+			line-height: @logo-height + @padding * 2;
+		
+			-webkit-transition: 0.3s all;
+		
+			&:hover { opacity: 1; }
+		} 
+	}
+
+}
+
+article {
+	font-family: "Gentium Basic";
+	color: @spacegray;
+	line-height: 42px;
+	font-size: 21px;
+
+	position: relative;
+	z-index: 2;
+	background: white;
+	padding: 0 0 100px;
+
+	margin-bottom: 64px;
+	-ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+
+	-webkit-hyphens: auto;
+   	-moz-hyphens: auto;
+    hyphens: auto;
+
+    h1, h2, h3, h4, h5, h6 {
+    	font-family: "Open Sans";
+
+    }
+
+    .hero {
+    	padding-top: 150px;
+    	position: relative;
+
+		background-position: top center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+    	&.background header {
+			padding-bottom: 50px;
+			color: white;
+    	}
+
+    	&.background:after {
+    		content: "";
+    		display: block;
+    		position: absolute;
+    		top: 0; left: 0; right: 0; bottom: 0;
+
+    		background: rgba(0,0,0,0.5);
+    	}
+
+    	&.background > header {
+    		position: relative;
+    		z-index: 2;
+    	}
+    }
+
+    header {
+    	margin-bottom: 50px !important;
+    	font-family: "Open Sans";
+
+    	h2 {
+    		font-size: 36px;
+    		text-align: left;
+    		margin: 0px 0px 4px;
+    	}
+    }
+
+	p {
+		margin-bottom: 40px;
+	}
+
+	a {
+		color: @blue;
+		text-decoration: none;
+		position: relative;
+
+		// text-shadow: -2px 0px 0px white, 2px 0px 0px white, 1px 0px 0px white, -1px 0px 0px white, 0px 0px 0px white;
+	
+		background: -webkit-linear-gradient(bottom, white 14%, @blue 14%, @blue 16%, white 16%);
+		background: -o-gradient(bottom, white 13%, @blue 13%, @blue 15%, white 15%);
+		background: linear-gradient(to top, white 13%, @blue 13%, @blue 15%, white 15%);
+	}
+
+	figure {
+		margin: 0;
+		position: relative;
+		img { max-width: 100%; }
+
+		figcaption {
+			float: left;
+			position: absolute;
+			right: 100%;
+			font-size: 14px;
+			top: 0;
+
+			padding-top: 10px;
+			margin-right: 15px;
+			width: (@content-width - @text-width) / 2;
+			line-height: 24px;
+
+			text-align: right;
+
+			color: darken(lightgray, 10%);
+
+			font-style: italic;
+		}
+
+		figcaption:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 30px;
+			height: 1px;
+
+			background: lightgray;
+		}
+	}
+
+	::selection {
+		text-shadow: none;
+		color: white;
+		background: @blue;
+	}
+}
+
+footer {
+	padding: 10px 0px 5px;
+
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	background: @spacegray;
+
+	.globalnav {
+		float: left;
+
+		a {
+			display: inline-block;
+			height: 44px;
+
+			margin-right: 10px;
+
+			img {
+				margin: 2.5px 0px;
+			}
+		}
+
+
+	}
+
+	.social {
+		float: right;
+
+		&:before {
+			content: "Socializujeme se!";
+			color: darken(@spacegray, 10%);
+			float: left;
+			line-height: 44px;
+			margin-right: 13px;
+			font-size: 14px;
+			font-style: italic;
+		}
+
+		a {
+			display: inline-block;
+			margin: 0;
+			height: 33px;
+
+			margin: (44px - 33px) / 2 0px;
+			margin-left: 3px;
+		}
+	}	
+
+	&:after {
+		clear: both;
+		content: "";
+		display: block;
+	}
+	
+}
+
+
+ul > li:nth-child(1) {
+	@color: @blue;
+
+	
+	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
+	> .sidenav { background: @color; }
+}
+
+ul > li:nth-child(2) {
+	@color: #2ECC71;
+
+	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
+	> .sidenav { background: @color; }
+}
+
+ul > li:nth-child(3) {
+	@color: #E67E22;
+
+	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
+	> .sidenav { background: @color; }
+}
+
+ul > li:nth-child(4) {
+	@color: #9B59B6;
+
+	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
+	> .sidenav { background: @color; }
+}
+
+ul > li:nth-child(5) {
+	@color: #F7CA18;
+
+	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
+	> .sidenav { background: @color; }
+}
+

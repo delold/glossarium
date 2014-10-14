@@ -1,13 +1,4 @@
-pjs.config({ 
-    // options: 'stdout', 'file' (set in config.logFile) or 'none'
-    log: 'stdout',
-    // options: 'json' or 'csv'
-    format: 'json',
-    // options: 'stdout' or 'file' (set in config.outFile)
-    writer: 'file',
-    outFile: 'scrape_data.json'
-});
-
+pjs.config({ log:'stdout', format:'json', writer:'file', outFile:'scrape_data.json'});
 
 var fs = require('fs');
 
@@ -18,20 +9,20 @@ if(fs.isFile("scrape_urls.json")) {
 	pjs.addSuite({
 		url: links,
 		scraper: function() {
-			var metadata = _pjs.$(".postmetadata").text().split(" • ");
+			var metadata = _pjs.$(".postmetadata").text().split(" • "),
+					date = metadata[0].split("/");
 
-			var obj = {
+			_pjs.$(".fblike").remove(); //FB? tfuj.
+			date[2] = "20"+date[2];
+
+			return {
 				"name": _pjs.$(".posttitle").text(),
-				"date": metadata[0],
-				"author": metadata[1],
+				"date": date.join("."),
+				"author": {"name": metadata[1], "url": _pjs.getAnchorUrls("a[rel=author]")[0]},
 				"categories": metadata[2].replace("rubrika ", "").split(","),
-				"content": _pjs.$(".entry").html()
+				"content": _pjs.$(".entry").html().trim(),
+				"tags": _pjs.getText("a[rel=tag]")
 			};
-
-			console.log(obj);
-
-			return obj;
 		}
 	});
-
 }
