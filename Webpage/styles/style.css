@@ -19,13 +19,16 @@ body {
   max-width: 750px;
 }
 .nav {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 99;
-  border-bottom: none;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: 0.1s border-bottom, 0.3s background;
+  -o-transition: 0.1s border-bottom, 0.3s background;
+  transition: 0.1s border-bottom, 0.3s background;
 }
 .nav.floating {
   border-bottom: 1px solid #ebebeb;
@@ -47,7 +50,7 @@ body {
   padding: 0px;
   display: inline-block;
   width: auto;
-  background: url("logo.png");
+  background: url("../img/logo.png");
   width: 207px;
   height: 44px;
   font-size: 0px;
@@ -62,10 +65,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  -webkit-mask-box-image: url("logo.png");
   content: "";
   display: block;
   -webkit-transition: 0.3s all;
+  -webkit-mask-box-image: url("../img/logo.png");
 }
 .nav h1:active {
   margin-top: 21px;
@@ -112,13 +115,10 @@ body {
 }
 .nav ul > li a {
   font-size: 18px;
-  color: #e6e6e6;
+  color: rgba(0, 0, 0, 0.2);
 }
 .nav:hover ul > li a {
-  color: #b3b3b3;
-}
-.nav:hover .search {
-  opacity: 0.8;
+  color: rgba(0, 0, 0, 0.4);
 }
 .nav ul > li a.active,
 .nav ul > li:hover a {
@@ -178,39 +178,91 @@ body {
   height: 44px;
   -webkit-transition: 0.1s all;
 }
-.nav .searchbox {
+.nav.search-active {
+  background: white;
+}
+.nav:hover .search .icon {
+  opacity: 0.8;
+}
+.nav.search-active .search .inside {
+  background: white;
+  padding-left: 15px;
+}
+.nav.search-active .search .inside input {
+  padding-left: 20px;
+  width: 722px;
+}
+.nav .search {
   display: inline-block;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   height: 84px;
+  pointer-events: none;
 }
-.nav .searchbox .container {
+.nav .search .container {
+  overflow: hidden;
+  height: 100%;
   padding-left: 232px;
+  position: relative;
 }
-.nav .searchbox input {
-  float: left;
-  display: inline-block;
+.nav .search .inside {
+  pointer-events: all;
+  position: absolute;
+  background: transparent;
+  right: 0;
+  height: 100%;
+  -webkit-transition: 0.3s all;
 }
-.nav .searchbox .inside {
-  display: inline-block;
-}
-.nav .searchbox .search {
+.nav .search .icon {
   display: inline-block;
   width: 26px;
+  height: 26px;
   float: left;
-  background: url("search.png");
+  margin: 29px 0px;
+  background: url("../img/search.png");
   background-repeat: no-repeat;
   background-position: center center;
   font-size: 0px;
   color: transparent;
-  opacity: 0.5;
+  opacity: 0.6;
   line-height: 84px;
   -webkit-transition: 0.3s all;
 }
-.nav .searchbox .search:hover {
+.nav .search .icon:hover {
   opacity: 1;
+}
+.nav .search input {
+  border: none;
+  float: left;
+  width: 0;
+  -webkit-transition: 0.3s all;
+  background: transparent;
+  height: 100%;
+  font-size: 20px;
+  padding-top: 3px;
+  color: #b3b3b3;
+  outline: none;
+}
+.nav .search input::-webkit-input-placeholder {
+  color: #e6e6e6;
+  font-style: italic;
+}
+.nav .search input:-moz-placeholder {
+  color: #e6e6e6;
+  font-style: italic;
+  opacity: 1;
+}
+.nav .search input::-moz-placeholder {
+  color: #e6e6e6;
+  font-style: italic;
+  opacity: 1;
+}
+.nav .search input:-ms-input-placeholder {
+  color: #e6e6e6;
+  font-style: italic;
 }
 article {
   font-family: "Gentium Basic";

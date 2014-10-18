@@ -36,7 +36,7 @@ body {
 .nav {
 	@padding: 20px;
 
-	background: white;
+	background: rgba(255,255,255,0.95);
 
 	position: absolute;
 	top: 0;
@@ -46,11 +46,15 @@ body {
 
 	z-index: 99;
 	
-	border-bottom: none;
+	border-bottom: 1px solid transparent;
 
 	&.floating {
 		border-bottom: 1px solid lighten(@spacegray, 70%);
 	}
+
+	-webkit-transition: 0.1s border-bottom, 0.3s background;
+	-o-transition: 0.1s border-bottom, 0.3s background;
+	transition: 0.1s border-bottom, 0.3s background;
 
 	&.background {
 		background: transparent;
@@ -76,7 +80,7 @@ body {
 		width: auto;
 
 
-		background: url("logo.png");
+		background: url("../img/logo.png");
 		width: @logo-width;
 		height: @logo-height;
 
@@ -90,11 +94,11 @@ body {
 		&:after {
 			position: absolute;
 			top: 0; left: 0; right: 0; bottom: 0;
-			-webkit-mask-box-image: url("logo.png");
 			content: "";
 			display: block;
 
 			-webkit-transition: 0.3s all;
+			-webkit-mask-box-image: url("../img/logo.png");
 		}
 
 		&:active {
@@ -143,8 +147,6 @@ body {
 		bottom: 2px;
 		
 		-webkit-transition: 0.3s all;
-		// -webkit-transition-delay: 0.5s;
-
 		width: 0px;
 
 		height: 1px;
@@ -159,22 +161,15 @@ body {
 
 	ul > li a {
 		font-size: 18px;
-		color: darken(white, 10%);
+		color: fadeout(black, 80%);
 	}
-
-
-
-
-	
 
 
 	&:hover ul > li a {
-		color: darken(white, 30%);
+		color: fadeout(black, 60%);
 	}
 
-	&:hover .search {
-		opacity: 0.8;
-	}
+	
 
 	ul > li a.active, ul > li:hover a {
 		color: @blue;
@@ -203,7 +198,6 @@ body {
 		text-decoration: none;
 		&:after {
 			width: 100%;
-			// -webkit-transition-delay: 0s;
 		}
 	}
 
@@ -219,7 +213,6 @@ body {
 		background: @blue;
 
 		-webkit-transition: 0.3s all;
-		// -webkit-transition-delay: 0.5s;
 
 		ul:before {
 			content: "Kategorie";
@@ -250,43 +243,71 @@ body {
 		-webkit-transition: 0.1s all;
 	}
 
+	&.search-active {
+		background: white;
+	}
 
+	&:hover .search .icon {
+		opacity: 0.8;
+	}
+
+	&.search-active .search .inside {
+		background: white;
+		padding-left: 15px;
+
+		input {
+			padding-left: 20px;
+			width: @content-width - @logo-width - 26px - 15px - 10px; 
+		}
+	}
 
 	
 
-	.searchbox {
+	.search {
+		@left-padding: @logo-width + 25px;
+	
 		display: inline-block;
 
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
+		bottom: 0;
 
-		height: @padding*2 + @logo-height;
+		height: @logo-height + @padding*2;
 
-		
+		pointer-events: none;
+	
+		.container { 
+			overflow: hidden;
+			height: 100%;
+			padding-left: @left-padding;
 
-		.container { padding-left: @logo-width + 25px; }
-
-		input {
-			float: left;
-			display: inline-block;
+			position: relative;
 		}
+
+
 
 		.inside {
-			display: inline-block;
+			pointer-events: all;
+			position: absolute;
+			background: transparent;
+			right: 0;
+			height: 100%;
+
+			-webkit-transition: 0.3s all;
 		}
 
-		 .search {
-			
+		.icon {
 			display: inline-block;
 			width: 26px;
+			height: 26px;
 		
 			float: left;
-			
-			background: url("search.png");
-		
-		
+
+			margin: ((@logo-height + @padding * 2) - 26px) / 2 0px;
+
+			background: url("../img/search.png");
 		
 			background-repeat: no-repeat;
 			background-position: center center;
@@ -294,14 +315,49 @@ body {
 			font-size: 0px;
 			color: transparent;
 		
-			opacity: 0.5;
+			opacity: 0.6;
 		
 			line-height: @logo-height + @padding * 2;
-		
+
 			-webkit-transition: 0.3s all;
 		
 			&:hover { opacity: 1; }
 		} 
+
+		input {
+			border: none;
+			float: left;
+
+			width: 0;
+
+			-webkit-transition: 0.3s all;
+
+			background: transparent;
+			height: 100%;
+			font-size: 20px;
+			padding-top: 3px;
+			color: lighten(black, 70%);
+			outline: none;
+		}
+
+		input::-webkit-input-placeholder { 
+		    color: lighten(black, 90%);
+		    font-style: italic;
+		}
+		input:-moz-placeholder { 
+		   color: lighten(black, 90%);
+		   font-style: italic;
+		   opacity:  1;
+		}
+		input::-moz-placeholder {
+		   color: lighten(black, 90%);
+		   font-style: italic;
+		   opacity:  1;
+		}
+		input:-ms-input-placeholder {
+		   color: lighten(black, 90%);
+		   font-style: italic;
+		}
 	}
 
 }
