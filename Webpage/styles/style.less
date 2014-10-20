@@ -16,6 +16,8 @@ body {
 	margin: 0px;
 	padding: 0px;
 
+	// background: @spacegray;
+
 	color: #212121;
 }
 
@@ -227,13 +229,77 @@ body {
 		> ul {
 			display: block;
 			position: relative;
-			padding: 10px 0px 10px 0px;
 
 			.container;
 		}
 
-		> ul li a {
-			color: white;
+		> ul li { line-height: 44px; }
+
+		> ul li a {	color: white; }
+
+		&:after {
+			position: absolute;
+			top: 44px;
+			bottom: 0;
+			left: 0; 
+			right: 0;
+
+			content: "";
+			background: rgba(0,0,0,0.08);
+		}
+
+		&.active {
+			height: 44px + 100px !important;
+			-webkit-transition: 0.3s all !important;
+		}
+
+
+
+		> ul > li > ul { 
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+
+			height: 100px;
+			z-index: 1;
+
+			visibility: hidden;
+			opacity: 0;
+
+			-webkit-transition: 0.2s all;
+		}
+
+		> ul > li > ul:before {
+			content: "";
+			float: left;
+
+			height: 100%;
+		}
+
+		> ul > li > ul li {
+			line-height: initial;
+
+			padding: 20px 5px 20px 25px;
+		}
+
+		> ul > li > ul a {
+			margin-top: 12px;
+			font-size: 24px;
+			font-style: italic;
+			span { display: block; font-size: 12px; }
+		}
+
+
+
+
+		> ul > li:hover > a {
+			text-decoration: underline;
+		}
+		> ul > li:hover > ul {
+			visibility: visible;
+			opacity: 1;
+
 		}
 		
 	}
@@ -242,6 +308,8 @@ body {
 		height: 44px;
 		-webkit-transition: 0.1s all;
 	}
+
+
 
 	&.search-active {
 		background: white;
@@ -336,16 +404,16 @@ body {
 			height: 100%;
 			font-size: 20px;
 			padding-top: 3px;
-			color: lighten(black, 70%);
+			color: fadeout(black, 70%);
 			outline: none;
 		}
 
 		input::-webkit-input-placeholder { 
-		    color: lighten(black, 90%);
+		    color: fadeout(black, 90%);
 		    font-style: italic;
 		}
 		input:-moz-placeholder { 
-		   color: lighten(black, 90%);
+		   color: fadeout(black, 90%);
 		   font-style: italic;
 		   opacity:  1;
 		}
@@ -551,6 +619,7 @@ ul > li:nth-child(1) {
 	
 	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
 	> .sidenav { background: @color; }
+	> .latest-articles { background: darken(@color, 5%); }
 }
 
 ul > li:nth-child(2) {
@@ -558,6 +627,7 @@ ul > li:nth-child(2) {
 
 	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
 	> .sidenav { background: @color; }
+	> .latest-articles { background: darken(@color, 5%); }
 }
 
 ul > li:nth-child(3) {
@@ -565,6 +635,7 @@ ul > li:nth-child(3) {
 
 	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
 	> .sidenav { background: @color; }
+	> .latest-articles { background: darken(@color, 5%); }
 }
 
 ul > li:nth-child(4) {
@@ -572,6 +643,7 @@ ul > li:nth-child(4) {
 
 	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
 	> .sidenav { background: @color; }
+	> .latest-articles { background: darken(@color, 5%); }
 }
 
 ul > li:nth-child(5) {
@@ -579,5 +651,6 @@ ul > li:nth-child(5) {
 
 	a.active, &:hover a, &:hover a:after { color: @color; border-bottom-color: @color; }
 	> .sidenav { background: @color; }
+	> .latest-articles { background: darken(@color, 5%); }
 }
 

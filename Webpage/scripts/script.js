@@ -34,8 +34,17 @@ $(document).ready(function() {
 		$(".nav").addClass("search-active");
 		$(".nav .search input").focus();
 	});
+
 	$(".nav .search input").focusout(function(e) {
 		$(this).val("");
 		$(".nav").removeClass("search-active");
+	});
+
+	$(".sidenav > ul > li").hover(function() {
+		if($(this).has("ul").length) {
+			$(this).closest(".sidenav").toggleClass("active");
+		} else {
+			$(this).closest(".sidenav").removeClass("active");
+		}
 	});
 });
