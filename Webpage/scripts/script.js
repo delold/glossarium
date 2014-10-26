@@ -47,4 +47,8 @@ $(document).ready(function() {
 			$(this).closest(".sidenav").removeClass("active");
 		}
 	});
+
+	$("main img").click(function() {
+		console.log("AHOJ");
+	});
 });
